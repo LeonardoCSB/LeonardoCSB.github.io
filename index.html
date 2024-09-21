@@ -9,96 +9,101 @@
     <link rel="stylesheet" href="./style.css">
     <style>
 body {
-    height: 100%;
-    width: 100%;
-    background: #080f1a; /* Color inicial */
+    height: 100vh;
+    width: 100vw;
+    background: #080f1a;
     overflow: hidden;
-    position: absolute;
+    position: relative; 
+    margin: 0; /* Asegurarse de que no haya margen alrededor del body */
 }
 
 body::before {
     content: "";
     position: absolute;
-    top: 50%; /* Centro vertical */
-    left: 50%; /* Centro horizontal */
-    height: 100vh; /* Usar altura completa de la ventana */
-    width: 100vh; /* Usar altura completa para que sea circular */
-    background: rgba(255, 255, 255, 0); /* Comienza transparente */
-    border-radius: 50%; /* Forma de círculo */
-    transform: translate(-50%, -50%); /* Centrar el círculo */
-    animation: expandCircle 15s forwards; /* Cambia la duración si es necesario */
+    top: 50%; 
+    left: 50%; 
+    height: 200vh; 
+    width: 200vh; 
+    background: rgba(255, 255, 255, 0); 
+    border-radius: 50%; 
+    transform: translate(-50%, -50%); 
+    animation: expandCircle 15s forwards; 
 }
 
 @keyframes expandCircle {
     0% {
-        transform: translate(-50%, -50%) scale(0); /* Comienza en un punto */
-        background: rgba(255, 255, 255, 0); /* Transparente al inicio */
+        transform: translate(-50%, -50%) scale(0); 
+        background: rgba(255, 255, 255, 0); 
     }
     100% {
-        transform: translate(-50%, -50%) scale(2); /* Expande a 200% */
-        background: rgba(255, 255, 255, 1); /* Cambia a blanco al final */
+        transform: translate(-50%, -50%) scale(1); 
+        background: rgba(255, 255, 255, 1); 
     }
 }
 
-/* Resto del CSS aquí */
+/* Contenedor centrado */
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ajustar al ancho completo */
+    height: 100%; /* Ajustar a la altura completa */
+}
 
-        .container {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
- 
-        }
+.glass {
+    height: 800px;
+    width: 600px;
+    background: #122139;
+    border-radius: 300px 300px 0px 0px;
+    position: relative; /* Asegura que sus elementos hijos se posicionen correctamente */
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
 
-        .glass {
-            height: 800px;
-            width: 600px;
-            background: #122139;
-            border-radius: 300px 300px 0px 0px;
-           align-items: center;
-           align-content: center;
-        }
+.glass:before {
+    content: "";
+    height: 40px;
+    width: 40px;
+    border: 25px solid #122139;
+    border-radius: 100%;
+    position: absolute;
+    left: 50%; 
+    top: -50px; /* Ajusta según sea necesario */
+    transform: translateX(-50%); /* Centra horizontalmente */
+}
 
-        .glass:before {
-            content: "";
-            height: 40px;
-            width: 40px;
-            transform-origin: center;
-            border: 25px solid #122139;
-            border-radius: 100%;
-            position: absolute;
-            left: 256px;
-            top: -74px;
-        }
+.glass:after {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: 100%; /* Usar todo el ancho de .glass */
+    background: #a52a2a;
+    bottom: 0; /* Coloca la línea en la parte inferior */
+    left: 0;
+}
 
-        .glass:after {
-            content: "";
-            position: relative;
-            height: 15px;
-            width: 600px;
-            background: #a52a2a;
-            top: 100%;
-            left: 0%;
-        }
-
-        .fallingPetal {
-            position: absolute;
-            background: #f1c40f;
-            width: 30px;
-            height: 15px;
-            border-radius: 0px 30px 0px 30px;
-          
-            opacity: 1;
-            animation: falling 4s linear forwards; /* Ajusta la duración y el tipo de animación */
-        }
+.fallingPetal {
+    position: absolute;
+    background: #f1c40f;
+    width: 30px;
+    height: 15px;
+    border-radius: 0px 30px 0px 30px;
+    opacity: 1;
+    animation: falling 4s linear forwards; 
+}
 
 @keyframes falling {
     0% {
-        transform: translate(-50%, 0) rotate(var(--angle)); /* Comienza en el centro */
+        transform: translate(-50%, 0) rotate(var(--angle)); 
         opacity: 1;
     }
     100% {
-        transform: translate(calc(var(--x) + -80%), 100vh) rotate(var(--angle)); /* Caída hacia abajo */
+        transform: translate(calc(var(--x) + -80%), 100vh) rotate(var(--angle)); 
         opacity: 0;
     }
 }
@@ -108,9 +113,10 @@ body::before {
         transform: translate(-50%, 0) rotate(var(--angle));
     }
     50% {
-        transform: translate(calc(var(--x) + -85%), 0) rotate(var(--angle)); /* Mover un poco más a la izquierda */
+        transform: translate(calc(var(--x) + -85%), 0) rotate(var(--angle)); 
     }
 }
+
 
 
         .shine {
@@ -424,7 +430,7 @@ body::before {
 
     // Posicionar el pétalo en el centro
     petal.style.left = "50%"; // Centro horizontal
-    petal.style.top = "290px"; // Iniciar desde la parte superior
+    petal.style.top = "320px"; // Iniciar desde la parte superior
 
     // Asignar un desplazamiento y ángulo aleatorio hacia la izquierda
     const randomX = (Math.random() * -50); // Desplazamiento negativo para que vaya a la izquierda
